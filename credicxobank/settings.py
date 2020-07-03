@@ -25,7 +25,7 @@ SECRET_KEY = 'p*q9f8n)#w8srf^ys#-6o#*&obn@2knyu4yqk3lj&bee+y8+n6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["credicxobank.herokuapp.com"]
 
 
 # Application definition
