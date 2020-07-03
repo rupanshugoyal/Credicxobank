@@ -1,0 +1,1 @@
+web: gunicorn credicxobank.wsgi:application --log-file -

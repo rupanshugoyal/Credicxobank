@@ -1,0 +1,170 @@
+<HTML>
+	<HEAD>
+		<STYLE>
+			body {
+				background-color: #f4f1f1;
+			}
+			
+			#heading{
+				border: 1px solid;
+			}
+			
+			form{
+				border: 1px solid;
+			}
+			
+			input{
+				width: 80%;
+				margin-top: 5%;
+			}
+
+			button{
+				border:0px; 
+				background-color:#4285F4; 
+				margin: 8%;
+				height: 35px; 
+				width: 80%;
+				align-self: center;
+			}
+
+			table.paleBlueRows {
+				font-family: "Times New Roman", Times, serif;
+				border: 1px solid #FFFFFF;
+				width: 100%;
+				border-collapse: collapse;
+			}
+			
+			table.paleBlueRows td, table.paleBlueRows th {
+				border: 1px solid #FFFFFF;
+			}
+			
+			table.paleBlueRows tbody td {
+				font-size: 15px;
+			}
+			
+			table.paleBlueRows tr:nth-child(even) {
+				background: #D0E4F5;
+			}
+			
+			table.paleBlueRows thead {
+				background: #0B6FA4;
+				border-bottom: 5px solid #FFFFFF;
+			}
+			
+			table.paleBlueRows thead th {
+				font-size: 17px;
+				font-weight: bold;
+				color: #FFFFFF;
+				border-left: 2px solid #FFFFFF;
+			}
+			
+			table.paleBlueRows thead th:first-child {
+				border-left: none;
+			}
+			
+			.column {
+				float: left;
+				width: 40%;
+				padding: 5%;
+			}
+
+			.row::after {
+				content: "";
+				clear: both;
+				display: table;
+			}
+			
+			#info{
+				font-size: 20px;
+			}
+			
+		</STYLE>
+		<TITLE>Credicxo Banks App</TITLE>
+	</HEAD>
+	<BODY>
+		
+		<center>
+			<H1 id = "heading"> WELCOME TO CREDICXO BANKS APP. </H1>
+			<p id = "info">Find information about banks thorugh IFSC number or find banks through bank name and city.</p>
+		</center>
+		
+		<div class="row">
+			<div class="column">
+				<form name = "IFSCForm" action = "/" method = "POST"> 
+				{% csrf_token %}
+				 
+				 <div>
+					<center> 
+					   <input type = "text" placeholder = "BANK IFSC" name = "IFSC" maxlength = "11" required/>
+					</center>
+				 </div>
+				 
+				 <input type="hidden" id="FORMNAME" name="FORMNAME" value="IFSC" required>
+				 
+				 <div>
+					<center> 
+					   <button type = "submit" value = "LOOKUP">
+						  <strong>LOOKUP</strong>
+					   </button>
+					</center>
+				 </div>
+				</form>
+			</div>
+			
+			<div class="column">
+				<form name = "BANKForm" action = "/" method = "POST"> 
+				{% csrf_token %}
+				 
+				 <div>
+					<center> 
+					   <input type = "text" placeholder = "NAME" name = "BANKNAME" maxlength = "49" required/>
+					</center>
+				 </div>
+				 
+				 <div>
+					<center> 
+					   <input type = "text" placeholder = "CITY" name = "CITYNAME" maxlength = "50" required/>
+					</center>
+				 </div>
+				 
+				 <input type="hidden" id="FORMNAME" name="FORMNAME" value="BANK" required>
+				 
+				 <div>
+					<center> 
+					   <button type = "submit" value = "FIND ALL" >
+						  <strong>FIND ALL</strong>
+					   </button>
+					</center>
+				 </div>
+				</form>
+			</div>
+		</div>
+		
+		<HR>
+		
+		{% if result == True %}
+			<table class="paleBlueRows">
+				<tr>
+					<th>BANK IFSC</th>
+					<th>BANK NAME</th>
+					<th>BRANCH</th>
+					<th>ADDRESS</th>
+					<th>CITY</th>
+					<th>DISTRICT</th>
+					<th>STATE</th>
+				</tr>
+				{% for item in query_results %}
+					<tr> 
+						<td>{{ item.ifsc }}</td>
+						<td>{{ item.bank_name }}</td>
+						<td>{{ item.branch }}</td>
+						<td>{{ item.address }}</td>
+						<td>{{ item.city }}</td>
+						<td>{{ item.district }}</td>
+						<td>{{ item.state }}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% endif %}
+	</BODY>
+</HTML>
