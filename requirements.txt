@@ -24,8 +24,6 @@ Pillow==7.1.2
 pluggy==0.13.1
 psutil==5.7.0
 psycopg2==2.8.5
-pwn==1.0
-pwntools==4.3.0.dev0
 py==1.8.1
 pycparser==2.20
 pyelftools==0.26
