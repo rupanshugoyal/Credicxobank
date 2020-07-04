@@ -13,6 +13,7 @@ def index(request):
     
             if form1.is_valid():
                 num = form1.cleaned_data['IFSC']
+                num = str(num).upper()
                 details = bank_branches.objects.filter(ifsc=num)
                 if(len(details) != 0):
                     return render(request, "index.html" , {"query_results":details, "result": True})
@@ -23,6 +24,8 @@ def index(request):
             if form1.is_valid():
                 bname = form1.cleaned_data["BANKNAME"]
                 cityname = form1.cleaned_data["CITYNAME"]
+                bname = str(bname).upper()
+                cityname = str(cityname).upper()
                 details = bank_branches.objects.filter(bank_name = bname, city = cityname)
                 if(len(details) != 0):
                     return render(request, "index.html" , {"query_results":details, "result": True})
